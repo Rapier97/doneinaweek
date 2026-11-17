@@ -287,8 +287,8 @@ footer a{color:var(--muted)}
     var any=false;
     for(k=0;k<items.length;k++){var it=items[k],r=rects[k],cx=r.left+r.width/2-it.rx,cy=r.top+r.height/2-it.ry,dx=cx-mx,dy=cy-my,d=Math.sqrt(dx*dx+dy*dy);
       var tx=0,ty=0,tg=0;if(d<RADIUS&&d>0){var f=(1-d/RADIUS);f=f*f;tx=dx/d*f*22;ty=dy/d*f*22;tg=f*.4}
-      it.rx+=(tx-it.rx)*.07;it.ry+=(ty-it.ry)*.07;it.glow+=(tg-it.glow)*.07;
-      if(Math.abs(it.rx)>.05||Math.abs(it.ry)>.05||it.glow>.005)any=true;
+      it.rx+=(tx-it.rx)*.02;it.ry+=(ty-it.ry)*.02;it.glow+=(tg-it.glow)*.02;
+      if(Math.abs(tx-it.rx)>.02||Math.abs(ty-it.ry)>.02||Math.abs(tg-it.glow)>.002)any=true;
       it.outer.style.transform='translate('+it.rx.toFixed(1)+'px,'+(-scrollY0*it.depth*.08+it.ry).toFixed(1)+'px)';
       it.el.style.setProperty('--g',it.glow.toFixed(3));}
     if(any){parallaxQueued=true;requestAnimationFrame(parallax)}}

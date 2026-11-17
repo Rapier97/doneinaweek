@@ -20,13 +20,13 @@ html{color-scheme:light dark}body{margin:0}img{max-width:100%}[hidden]{display:n
 /* Layout: one column of paper, a seven-day strip as the hero image, sections as calendar entries. */
 :root{
   --paper:#F7F6F1; --ink:#171C1A; --muted:#5B625E; --line:#D9D8CF;
-  --mark:#F3C63F; --mark-ink:#171C1A; --card:#FFFFFF;
+  --mark:#F3C63F; --mark-ink:#171C1A; --card:#FFFFFF; --star:#B8B19A;
   --display:"Bricolage Grotesque","Helvetica Neue",Arial,sans-serif;
   --body:"Public Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
 }
 @media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
-  --paper:#14191A; --ink:#F2F1EA; --muted:#A4ABA6; --line:#2C3433; --mark:#F3C63F; --mark-ink:#14191A; --card:#1C2324; color-scheme:dark}}
-:root[data-theme="dark"]{--paper:#14191A; --ink:#F2F1EA; --muted:#A4ABA6; --line:#2C3433; --mark:#F3C63F; --mark-ink:#14191A; --card:#1C2324; color-scheme:dark}
+  --paper:#14191A; --ink:#F2F1EA; --muted:#A4ABA6; --line:#2C3433; --mark:#F3C63F; --mark-ink:#14191A; --card:#1C2324; --star:#F2F1EA; color-scheme:dark}}
+:root[data-theme="dark"]{--paper:#14191A; --ink:#F2F1EA; --muted:#A4ABA6; --line:#2C3433; --mark:#F3C63F; --mark-ink:#14191A; --card:#1C2324; --star:#F2F1EA; color-scheme:dark}
 
 *{box-sizing:border-box}
 body{margin:0;background:var(--paper);color:var(--ink);font:17px/1.6 var(--body);
@@ -105,7 +105,7 @@ footer a{color:var(--muted)}
 .bg{position:fixed;inset:0;overflow:hidden;pointer-events:none;z-index:0}
 .bg-glow{position:absolute;inset:0;background:radial-gradient(ellipse at 50% 30%, color-mix(in srgb, var(--mark) 28%, transparent) 0%, transparent 60%);animation:bg-breathe 18s ease-in-out infinite}
 .bg .p{position:absolute;left:0;top:0;will-change:transform}
-.bg .dot{border-radius:50%;background:var(--ink);box-shadow:0 0 6px 1px color-mix(in srgb, var(--ink) 55%, transparent);will-change:transform,opacity;animation:p-drift var(--dur,30s) ease-in-out infinite,p-twinkle var(--tw,5s) ease-in-out infinite;animation-delay:var(--d1,0s),var(--d2,0s);opacity:var(--o,.1)}
+.bg .dot{border-radius:50%;background:var(--star);box-shadow:0 0 6px 1px color-mix(in srgb, var(--star) 55%, transparent);will-change:transform,opacity;animation:p-drift var(--dur,30s) ease-in-out infinite,p-twinkle var(--tw,5s) ease-in-out infinite;animation-delay:var(--d1,0s),var(--d2,0s);opacity:var(--o,.1)}
 .bg .dot.mark{background:var(--mark);box-shadow:0 0 8px 2px color-mix(in srgb, var(--mark) 70%, transparent)}
 .bg .w{position:absolute;left:0;top:0;animation:p-wander var(--wd,40s) ease-in-out infinite;animation-delay:var(--wdel,0s)}
 .bg .c{position:absolute;left:0;top:0;animation:p-cluster var(--cd,16s) ease-in-out infinite;animation-delay:var(--cdel,0s)}
@@ -128,7 +128,7 @@ footer a{color:var(--muted)}
 
 <div class="hero">
   <h1>Apps, web tools and AI agents for small businesses. Live in a week.</h1>
-  <p class="lede">You tell me the problem. I design the solution, build it and get it live. One week, £2,000, fixed.</p>
+  <p class="lede">You tell me the problem. I design the solution, build it and get it live.<br>One week, £2,000, fixed.</p>
 
   <div class="week" role="tablist" aria-label="A typical week. Tap a day for detail.">
     <button class="day" type="button" role="tab" aria-selected="true" data-detail="Half an hour on the phone. What the task is, who does it now, where it goes wrong. I ask the awkward questions on day one, not halfway through the build."><b>Mon</b><small>We talk through the problem.</small></button>

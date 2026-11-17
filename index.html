@@ -103,7 +103,7 @@ footer a{color:var(--muted)}
 
 /* Background particles (ported from QueryTrace), in the site's own colours */
 .bg{position:fixed;inset:0;overflow:hidden;pointer-events:none;z-index:0}
-.bg-glow{position:absolute;inset:0;background:radial-gradient(ellipse at 50% 30%, color-mix(in srgb, var(--mark) 14%, transparent) 0%, transparent 60%);animation:bg-breathe 18s ease-in-out infinite}
+.bg-glow{position:absolute;inset:0;background:radial-gradient(ellipse 70% 60% at 0% 0%, color-mix(in srgb, #F0A030 30%, transparent) 0%, color-mix(in srgb, var(--mark) 16%, transparent) 35%, transparent 72%);animation:bg-breathe 18s ease-in-out infinite}
 .bg .p{position:absolute;left:0;top:0;will-change:transform}
 .bg .dot{border-radius:50%;background:var(--star);scale:calc(1 + var(--g,0)*.9);box-shadow:0 0 3px 0 color-mix(in srgb, var(--star) 30%, transparent);will-change:transform,opacity;animation:p-drift var(--dur,30s) ease-in-out infinite,p-twinkle var(--tw,5s) ease-in-out infinite;animation-delay:var(--d1,0s),var(--d2,0s);opacity:var(--o,.1)}
 .bg .dot.mark{background:var(--star-mark);box-shadow:0 0 4px 0 color-mix(in srgb, var(--star-mark) 35%, transparent)}
@@ -114,7 +114,7 @@ footer a{color:var(--muted)}
 @keyframes p-wander{0%,100%{transform:translate(0,0)}25%{transform:translate(calc(var(--wx,50px)*.5),calc(var(--wy,30px)*.3))}50%{transform:translate(var(--wx,50px),var(--wy,30px))}75%{transform:translate(calc(var(--wx,50px)*.3),calc(var(--wy,30px)*.7))}}
 @keyframes p-twinkle{0%,100%{opacity:min(1,calc(var(--o,.15) + var(--g,0)*.8))}50%{opacity:min(1,calc(var(--omin,.05) + var(--g,0)*.8))}}
 @keyframes p-cluster{0%,100%{transform:translate(var(--cx,0),var(--cy,0))}50%{transform:translate(calc(var(--cx,0px)*.3),calc(var(--cy,0px)*.3))}}
-@keyframes bg-breathe{0%,100%{opacity:.35}50%{opacity:1}}
+@keyframes bg-breathe{0%,100%{opacity:.6}50%{opacity:1}}
 @media (prefers-reduced-motion: reduce){.bg *{animation:none!important}}
 </style>
 </head>

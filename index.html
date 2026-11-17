@@ -20,19 +20,19 @@ html{color-scheme:light dark}body{margin:0}img{max-width:100%}[hidden]{display:n
 /* Layout: one column of paper, a seven-day strip as the hero image, sections as calendar entries. */
 :root{
   --paper:#F7F6F1; --ink:#171C1A; --muted:#5B625E; --line:#D9D8CF;
-  --mark:#F3C63F; --mark-ink:#171C1A; --card:#FFFFFF; --star:#B8B19A;
+  --mark:#F3C63F; --mark-ink:#171C1A; --card:#FFFFFF; --star:#DCD7C6; --star-mark:#F6DD8E;
   --display:"Bricolage Grotesque","Helvetica Neue",Arial,sans-serif;
   --body:"Public Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
 }
 @media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
-  --paper:#14191A; --ink:#F2F1EA; --muted:#A4ABA6; --line:#2C3433; --mark:#F3C63F; --mark-ink:#14191A; --card:#1C2324; --star:#F2F1EA; color-scheme:dark}}
+  --paper:#14191A; --ink:#F2F1EA; --muted:#A4ABA6; --line:#2C3433; --mark:#F3C63F; --mark-ink:#14191A; --card:#1C2324; --star:#8F978F; --star-mark:#C9AE5A; color-scheme:dark}}
 :root[data-theme="dark"]{--paper:#14191A; --ink:#F2F1EA; --muted:#A4ABA6; --line:#2C3433; --mark:#F3C63F; --mark-ink:#14191A; --card:#1C2324; --star:#F2F1EA; color-scheme:dark}
 
 *{box-sizing:border-box}
 body{margin:0;background:var(--paper);color:var(--ink);font:17px/1.6 var(--body);
   padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:0}
 .wrap{max-width:860px;margin:0 auto}
-header{display:flex;align-items:center;justify-content:space-between;gap:16px;padding-block:22px;border-bottom:1px solid var(--line)}
+header{position:relative;z-index:2;background:var(--paper);box-shadow:0 0 0 100vmax var(--paper);clip-path:inset(0 -100vmax);display:flex;align-items:center;justify-content:space-between;gap:16px;padding-block:22px;border-bottom:1px solid var(--line)}
 .brand{font:700 20px/1 var(--display);letter-spacing:-.01em}
 .brand span{background:var(--mark);color:var(--mark-ink);padding:2px 6px;border-radius:4px;margin-left:2px}
 header a{color:var(--ink);text-decoration:none;font-weight:600;font-size:15px;border-bottom:2px solid var(--mark)}
@@ -103,10 +103,10 @@ footer a{color:var(--muted)}
 
 /* Background particles (ported from QueryTrace), in the site's own colours */
 .bg{position:fixed;inset:0;overflow:hidden;pointer-events:none;z-index:0}
-.bg-glow{position:absolute;inset:0;background:radial-gradient(ellipse at 50% 30%, color-mix(in srgb, var(--mark) 28%, transparent) 0%, transparent 60%);animation:bg-breathe 18s ease-in-out infinite}
+.bg-glow{position:absolute;inset:0;background:radial-gradient(ellipse at 50% 30%, color-mix(in srgb, var(--mark) 14%, transparent) 0%, transparent 60%);animation:bg-breathe 18s ease-in-out infinite}
 .bg .p{position:absolute;left:0;top:0;will-change:transform}
-.bg .dot{border-radius:50%;background:var(--star);box-shadow:0 0 6px 1px color-mix(in srgb, var(--star) 55%, transparent);will-change:transform,opacity;animation:p-drift var(--dur,30s) ease-in-out infinite,p-twinkle var(--tw,5s) ease-in-out infinite;animation-delay:var(--d1,0s),var(--d2,0s);opacity:var(--o,.1)}
-.bg .dot.mark{background:var(--mark);box-shadow:0 0 8px 2px color-mix(in srgb, var(--mark) 70%, transparent)}
+.bg .dot{border-radius:50%;background:var(--star);box-shadow:0 0 4px 0 color-mix(in srgb, var(--star) 35%, transparent);will-change:transform,opacity;animation:p-drift var(--dur,30s) ease-in-out infinite,p-twinkle var(--tw,5s) ease-in-out infinite;animation-delay:var(--d1,0s),var(--d2,0s);opacity:var(--o,.1)}
+.bg .dot.mark{background:var(--star-mark);box-shadow:0 0 5px 1px color-mix(in srgb, var(--star-mark) 40%, transparent)}
 .bg .w{position:absolute;left:0;top:0;animation:p-wander var(--wd,40s) ease-in-out infinite;animation-delay:var(--wdel,0s)}
 .bg .c{position:absolute;left:0;top:0;animation:p-cluster var(--cd,16s) ease-in-out infinite;animation-delay:var(--cdel,0s)}
 .wrap{position:relative;z-index:1}
@@ -259,7 +259,7 @@ footer a{color:var(--muted)}
     var n=2+Math.floor(R()*2),depth=R()*.6+.2,o1=outer(R()*100,R()*100),wv=wander((R()*200-100)*(.6+depth*.8),(R()*180-90)*(.6+depth*.8),28+R()*26,R()*20);
     var dr=(6+R()*14)*(.7+depth*.6),da=R()*Math.PI*2,dx=Math.cos(da)*dr,dy=Math.sin(da)*dr,cd=12+R()*8,cdel=R()*10;
     for(j=0;j<n;j++){
-      var size=R()*2+2,o=R()*.3+.35,omin=Math.max(.08,o*(.3+R()*.25)),ang=(j/n)*Math.PI*2+R()*.5,dist=18+R()*26;
+      var size=R()*1.5+1.5,o=R()*.2+.15,omin=Math.max(.05,o*(.3+R()*.25)),ang=(j/n)*Math.PI*2+R()*.5,dist=18+R()*26;
       var c=document.createElement('div');c.className='c';c.style.cssText='--cx:'+(Math.cos(ang)*dist)+'px;--cy:'+(Math.sin(ang)*dist)+'px;--cd:'+cd+'s;--cdel:-'+cdel+'s';
       var d=dot(size,o,omin,dx,dy,25+R()*15,R()*20,3.5+R()*4.5);c.appendChild(d);wv.appendChild(c);
       items.push({el:d,outer:o1,depth:depth,resist:.55+R()*.45});made++;
@@ -267,7 +267,7 @@ footer a{color:var(--muted)}
     o1.appendChild(wv);layer.appendChild(o1);
   }
   for(i=made;i<count;i++){
-    var sz=R()<.7?R()*2+2:R()*2.5+3.5,op=R()*.3+.35,opm=Math.max(.08,op*(.3+R()*.25)),dp=(sz-1)/4*.6+.2;
+    var sz=R()<.7?R()*1.5+1.5:R()*2+3,op=R()*.2+.15,opm=Math.max(.05,op*(.3+R()*.25)),dp=(sz-1)/4*.6+.2;
     var r2=(6+R()*14)*(.7+dp*.6),a2=R()*Math.PI*2,o2=outer(R()*100,R()*100),w2=wander((R()*240-120)*(.6+dp*.9),(R()*220-110)*(.6+dp*.9),24+R()*30,R()*20);
     var d2=dot(sz,op,opm,Math.cos(a2)*r2,Math.sin(a2)*r2,25+R()*15,R()*20,3.5+R()*4.5);w2.appendChild(d2);o2.appendChild(w2);layer.appendChild(o2);
     items.push({el:d2,outer:o2,depth:dp,resist:R()*.95});
@@ -277,7 +277,7 @@ footer a{color:var(--muted)}
   function paint(){
     var boost=1+Math.max(0,1-scrollY0/700)*.9,thr=progress*MAX;
     for(var k=0;k<items.length;k++){var it=items[k],keep=Math.max(0,Math.min(1,(it.resist-thr)/FADE));
-      var o=Math.min(.85,+it.el.dataset.o*boost)*keep,om=Math.min(o,Math.max(.08,+it.el.dataset.omin*boost))*keep;
+      var o=Math.min(.45,+it.el.dataset.o*boost)*keep,om=Math.min(o,Math.max(.05,+it.el.dataset.omin*boost))*keep;
       it.el.style.setProperty('--o',o.toFixed(3));it.el.style.setProperty('--omin',om.toFixed(3));
       if(!reduced)it.outer.style.transform='translate(0,'+(-scrollY0*it.depth*.08).toFixed(1)+'px)';}
   }

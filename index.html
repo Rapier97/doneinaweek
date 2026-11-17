@@ -1,0 +1,231 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Done in a Week</title>
+<meta name="description" content="Apps, web tools and AI agents for small businesses, designed, built and live in one week. £2,000 fixed. Alex Vapier.">
+<meta property="og:title" content="Done in a Week">
+<meta property="og:description" content="Tell me your problem and have a working solution within a week.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://doneinaweek.com/">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Public+Sans:wght@400;500;600&display=swap">
+<style>
+html{color-scheme:light dark}body{margin:0}img{max-width:100%}[hidden]{display:none!important}
+</style>
+<style>
+/* Layout: one column of paper, a seven-day strip as the hero image, sections as calendar entries. */
+:root{
+  --paper:#F7F6F1; --ink:#171C1A; --muted:#5B625E; --line:#D9D8CF;
+  --mark:#F3C63F; --mark-ink:#171C1A; --card:#FFFFFF;
+  --display:"Bricolage Grotesque","Helvetica Neue",Arial,sans-serif;
+  --body:"Public Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --paper:#14191A; --ink:#F2F1EA; --muted:#A4ABA6; --line:#2C3433; --mark:#F3C63F; --mark-ink:#14191A; --card:#1C2324; color-scheme:dark}}
+:root[data-theme="dark"]{--paper:#14191A; --ink:#F2F1EA; --muted:#A4ABA6; --line:#2C3433; --mark:#F3C63F; --mark-ink:#14191A; --card:#1C2324; color-scheme:dark}
+
+*{box-sizing:border-box}
+body{margin:0;background:var(--paper);color:var(--ink);font:17px/1.6 var(--body);
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:0}
+.wrap{max-width:860px;margin:0 auto}
+header{display:flex;align-items:center;justify-content:space-between;gap:16px;padding-block:22px;border-bottom:1px solid var(--line)}
+.brand{font:700 20px/1 var(--display);letter-spacing:-.01em}
+.brand span{background:var(--mark);color:var(--mark-ink);padding:2px 6px;border-radius:4px;margin-left:2px}
+header a{color:var(--ink);text-decoration:none;font-weight:600;font-size:15px;border-bottom:2px solid var(--mark)}
+
+.hero{padding-block:56px 36px}
+h1{font:800 clamp(40px,8vw,72px)/1 var(--display);letter-spacing:-.03em;margin:0 0 18px;text-wrap:balance}
+.lede{font-size:clamp(18px,2.4vw,22px);color:var(--muted);max-width:34em;margin:0 0 32px}
+
+.week{display:grid;grid-template-columns:repeat(7,1fr);gap:6px;margin:0 0 32px;font-family:var(--display)}
+.day{border:1px solid var(--line);background:var(--card);border-radius:8px;padding:12px 8px 10px;min-height:112px;display:flex;flex-direction:column;gap:6px;min-width:0;text-align:left;color:inherit;cursor:pointer;font:inherit}
+.day:hover{border-color:var(--ink)}
+.day[aria-selected="true"]{border-color:var(--ink);box-shadow:0 0 0 2px var(--ink)}
+.day.live[aria-selected="true"]{box-shadow:0 0 0 2px var(--ink)}
+.day:focus-visible{outline:3px solid var(--mark);outline-offset:2px}
+.week{margin-bottom:14px}
+.detail{background:var(--card);border:1px solid var(--line);border-left:4px solid var(--mark);border-radius:8px;padding:14px 16px;margin:0 0 32px;font-size:16px;color:var(--ink);max-width:none}
+.day b{font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);font-weight:700}
+.day small{font-size:13px;line-height:1.3;color:var(--ink);font-family:var(--body)}
+.day.live{background:var(--mark);color:var(--mark-ink);border-color:var(--mark)}
+.day.live b,.day.live small{color:var(--mark-ink)}
+.day.live small{font-weight:600}
+@media (max-width:560px){.week{grid-template-columns:repeat(4,1fr)}.day{min-height:92px}}
+
+.cta{display:inline-flex;align-items:center;gap:10px;background:var(--ink);color:var(--paper);text-decoration:none;font-weight:600;padding:14px 20px;border-radius:10px;font-size:16px}
+.cta:focus-visible,header a:focus-visible,button:focus-visible{outline:3px solid var(--mark);outline-offset:3px}
+
+section{padding-block:40px;border-top:1px solid var(--line)}
+.eyebrow{font:700 12px/1 var(--display);letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin:0 0 14px}
+h2{font:700 clamp(26px,4vw,36px)/1.1 var(--display);letter-spacing:-.02em;margin:0 0 22px;text-wrap:balance}
+p{margin:0 0 14px;max-width:38em}
+
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px}
+.tile{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:20px;min-width:0}
+.tile h3{font:700 19px/1.2 var(--display);margin:0 0 8px}
+.tile p{font-size:15.5px;color:var(--muted);margin:0}
+
+.steps{list-style:none;padding:0;margin:0;display:grid;gap:0}
+.steps li{display:grid;grid-template-columns:96px 1fr;gap:16px;padding-block:18px;border-top:1px solid var(--line)}
+.steps .when{white-space:nowrap}
+.steps li:first-child{border-top:0}
+.steps .when{font:700 13px/1.4 var(--display);letter-spacing:.06em;text-transform:uppercase;color:var(--muted);padding-top:4px}
+.steps h3{font:700 19px/1.2 var(--display);margin:0 0 6px}
+.steps p{font-size:15.5px;color:var(--muted);margin:0}
+
+.work{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:24px;display:grid;grid-template-columns:1fr auto;gap:18px;align-items:start}
+.work h3{font:700 22px/1.15 var(--display);margin:0 0 8px}
+.work p{font-size:15.5px;color:var(--muted);margin:0 0 10px}
+.tags{display:flex;flex-wrap:wrap;gap:8px}
+.tag{font:600 12.5px/1 var(--body);padding:7px 10px;border-radius:999px;border:1px solid var(--line);color:var(--ink)}
+.stamp{font:800 13px/1 var(--display);letter-spacing:.08em;text-transform:uppercase;background:var(--mark);color:var(--mark-ink);padding:9px 11px;border-radius:6px;transform:rotate(-3deg);white-space:nowrap}
+@media (max-width:560px){.work{grid-template-columns:1fr}.stamp{justify-self:start}}
+
+.form{display:grid;gap:8px;max-width:480px}
+.form label{font:600 14px/1.3 var(--body);color:var(--muted);margin-top:8px}
+.form label span{font-weight:400}
+.form input,.form textarea{font:16px/1.4 var(--body);color:var(--ink);background:var(--card);border:1px solid var(--line);border-radius:10px;padding:12px 14px;width:100%;min-width:0}
+.form textarea{resize:vertical}
+.form input:focus-visible,.form textarea:focus-visible{outline:3px solid var(--mark);outline-offset:1px;border-color:var(--ink)}
+button.copy{font:600 16px/1 var(--body);background:var(--ink);color:var(--paper);border:0;border-radius:10px;padding:15px 18px;cursor:pointer;margin-top:10px;justify-self:start}
+button.copy[disabled]{opacity:.6;cursor:default}
+.status{font-size:15px;color:var(--muted);margin:4px 0 0;min-height:1.4em}
+.status[data-ok="1"]{color:var(--ink);font-weight:600}
+
+footer{padding-block:28px 40px;border-top:1px solid var(--line);font-size:14px;color:var(--muted);display:flex;flex-wrap:wrap;gap:8px 20px;justify-content:space-between}
+footer a{color:var(--muted)}
+@media (prefers-reduced-motion:no-preference){.stamp{transition:transform .2s}.work:hover .stamp{transform:rotate(0)}}
+.botcheck{display:none}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+  <div class="brand">Done in a <span>Week</span></div>
+  <a href="#contact">Get in touch</a>
+</header>
+
+<div class="hero">
+  <h1>Apps, web tools and AI agents for small businesses. Live in a week.</h1>
+  <p class="lede">You tell me the problem. I design the solution, build it and get it live. One week, £2,000, fixed.</p>
+
+  <div class="week" role="tablist" aria-label="A typical week. Tap a day for detail.">
+    <button class="day" type="button" role="tab" aria-selected="true" data-detail="Half an hour on the phone. What the task is, who does it now, where it goes wrong. I ask the awkward questions on day one, not halfway through the build."><b>Mon</b><small>We talk through the problem.</small></button>
+    <button class="day" type="button" role="tab" aria-selected="false" data-detail="You get a link to a design you can tap through. Not a sketch: every screen, with realistic example data, so you can tell straight away whether it's right."><b>Tue</b><small>You get a working design to tap through.</small></button>
+    <button class="day" type="button" role="tab" aria-selected="false" data-detail="You go through it and tell me any tweaks you'd like made. I make them the same day and send it back."><b>Wed</b><small>Revision one. You tell me what's wrong.</small></button>
+    <button class="day" type="button" role="tab" aria-selected="false" data-detail="Second pass on the details, then you sign off the design."><b>Thu</b><small>Revision two. Design signed off.</small></button>
+    <button class="day" type="button" role="tab" aria-selected="false" data-detail="We make the real thing: the app, the tool or the agent, connected to real data and real accounts."><b>Fri</b><small>Built for real.</small></button>
+    <button class="day" type="button" role="tab" aria-selected="false" data-detail="Building continues. You try it yourself as it comes together, on your phone or at your desk, with your own data."><b>Sat</b><small>Built for real.</small></button>
+    <button class="day live" type="button" role="tab" aria-selected="false" data-detail="Last day of the build and the final checks. It's ready for you Monday morning."><b>Sun</b><small>Built for real. Ready for you Monday morning.</small></button>
+  </div>
+  <p class="detail" id="detail" aria-live="polite">Half an hour on the phone. What the task is, who does it now, where it goes wrong. I ask the awkward questions on day one, not halfway through the build.</p>
+
+  <a class="cta" href="#contact">Tell me about the problem</a>
+</div>
+
+<section>
+  <p class="eyebrow">What I build</p>
+  <h2>Whatever shape the solution needs. Built properly, built fast.</h2>
+  <p class="lede">Ten years building software. I've led engineering teams on products with millions of daily users. Now I bring that to your business.</p>
+  <div class="grid">
+    <div class="tile"><h3>Phone apps</h3><p>For your team or your customers, on iPhone and Android. Rotas, bookings, forms, sign-offs, with notifications when something changes.</p></div>
+    <div class="tile"><h3>Web tools</h3><p>A page or a dashboard that does one thing brilliantly: a quote builder, a tracker, a portal. Opens in a browser, nothing to install.</p></div>
+    <div class="tile"><h3>AI agents and pipelines</h3><p>Something that reads the emails, sorts the documents, drafts the replies or fills in the spreadsheet, so a person doesn't have to.</p></div>
+  </div>
+</section>
+
+<section>
+  <p class="eyebrow">How it works</p>
+  <h2>You see it on day two. You shape it for two days. Then it's built.</h2>
+  <ol class="steps">
+    <li id="step-1"><div class="when">Day 1</div><div><h3>A call about the problem</h3><p>Half an hour on the phone. What the task is, who does it now, where it goes wrong. I ask the awkward questions then, not halfway through the build.</p></div></li>
+    <li id="step-2"><div class="when">Day 2</div><div><h3>A working design</h3><p>You get a link to a design you can tap through. Not a sketch: every screen, with realistic example data, so you can tell straight away whether it's right.</p></div></li>
+    <li id="step-3"><div class="when">Days 3–4</div><div><h3>Two rounds of changes</h3><p>You tell me any tweaks you'd like made. I make them the same day, and you sign off the design.</p></div></li>
+    <li id="step-4"><div class="when">Days 5–7</div><div><h3>Built for real</h3><p>We make the real thing. You try it with your own data as it comes together, on your phone or at your desk, and the last fixes go in over the weekend.</p></div></li>
+    <li id="step-5"><div class="when">Monday</div><div><h3>Ready for you Monday morning</h3><p>One link to send to whoever uses it, or an agent quietly doing the work. No monthly fees. It's done, and it's yours.</p></div></li>
+  </ol>
+</section>
+
+<section>
+  <p class="eyebrow">Price</p>
+  <h2>£2,000 for the week. Don't pay until the work is done.</h2>
+  <div class="grid">
+    <div class="tile"><h3>£1,000 at sign-off</h3><p>Paid on day four, once you've seen the design, had your tweaks made and are happy with it. If you're not, you walk away owing nothing.</p></div>
+    <div class="tile"><h3>£1,000 once it's working</h3><p>You've got a working app, web tool or agent in your hands, doing exactly what we agreed. That's when the second half is due.</p></div>
+    <div class="tile"><h3>The last payment is a 5-star review</h3><p>No monthly fees, no retainers. If you're happy on Monday morning, leave me a review. That's the final instalment.</p></div>
+  </div>
+</section>
+
+<section>
+  <p class="eyebrow">Recent work</p>
+  <div class="work">
+    <div>
+      <h3>Pegasus Adventure Breaks: staff rota app</h3>
+      <p>A care provider in Portsmouth with staff across several sites was running the rota from a spreadsheet. Now managers plan it in the app and staff get a notification when their shifts change, mark the days they're free, see who the duty manager is and claim their mileage from their phone.</p>
+      <div class="tags"><span class="tag">iPhone and Android</span><span class="tag">Sign in by text</span><span class="tag">Push notifications</span><span class="tag">Manager approvals</span></div>
+    </div>
+    <div class="stamp">Done in a week</div>
+  </div>
+</section>
+
+<section id="contact">
+  <p class="eyebrow">Get in touch</p>
+  <h2>Tell me your problem and have a working solution within a week.</h2>
+  <p>Leave a mobile number or an email, whichever you'd rather I use, and a line about the problem. I'll come back to you the same day.</p>
+  <form class="form" id="form" novalidate>
+    <label for="f-name">Your name</label>
+    <input id="f-name" name="name" type="text" autocomplete="name" required>
+    <label for="f-contact">Mobile number or email</label>
+    <input id="f-contact" name="contact" type="text" autocomplete="tel email" inputmode="email" required>
+    <label for="f-job">The problem, in a sentence or two <span>(optional)</span></label>
+    <textarea id="f-job" name="job" rows="3"></textarea>
+    <input type="checkbox" name="botcheck" class="botcheck" tabindex="-1" autocomplete="off" aria-hidden="true">
+    <button class="copy" id="send" type="submit">Send</button>
+    <p class="status" id="status" role="status"></p>
+  </form>
+</section>
+
+<footer>
+  <div>© 2026 Done in a Week · Alex Vapier</div>
+</footer>
+</div>
+
+<script>
+(function(){
+  var days=[].slice.call(document.querySelectorAll('.day')),d=document.getElementById('detail');
+  days.forEach(function(x){x.addEventListener('click',function(){
+    days.forEach(function(y){y.setAttribute('aria-selected','false')});
+    x.setAttribute('aria-selected','true');d.textContent=x.getAttribute('data-detail');
+  })});
+})();
+(function(){
+  // Contact form → Web3Forms (free form-to-email). Paste the access key from web3forms.com here.
+  var ACCESS_KEY='WEB3FORMS_ACCESS_KEY';
+  var f=document.getElementById('form'),s=document.getElementById('status'),btn=document.getElementById('send');
+  f.addEventListener('submit',function(ev){
+    ev.preventDefault();
+    var name=f.name.value.trim(),contact=f.contact.value.trim(),job=f.job.value.trim();
+    s.dataset.ok='';
+    if(!name||!contact){s.textContent='Please add your name and a mobile number or email.';return}
+    if(f.botcheck.checked){return}
+    btn.disabled=true;s.textContent='Sending…';
+    var payload={access_key:ACCESS_KEY,subject:'Done in a Week enquiry from '+name,from_name:'doneinaweek.com',
+      name:name,contact:contact,problem:job||'(not given)'};
+    if(/@/.test(contact)) payload.replyto=contact;
+    fetch('https://api.web3forms.com/submit',{method:'POST',headers:{'Content-Type':'application/json',Accept:'application/json'},body:JSON.stringify(payload)})
+      .then(function(r){return r.json()}).then(function(j){
+        if(!j.success) throw new Error(j.message||'failed');
+        s.dataset.ok='1';s.textContent='Got it, '+name.split(' ')[0]+'. I’ll be in touch today.';f.reset();
+      }).catch(function(){
+        s.textContent='That didn’t send. Email alex.rapier13@gmail.com and I’ll pick it up.';
+        btn.disabled=false;
+      });
+  });
+})();
+</script>
+</body>
+</html>

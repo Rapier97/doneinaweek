@@ -105,14 +105,14 @@ footer a{color:var(--muted)}
 .bg{position:fixed;inset:0;overflow:hidden;pointer-events:none;z-index:0}
 .bg-glow{position:absolute;inset:0;background:radial-gradient(ellipse 70% 60% at 0% 0%, color-mix(in srgb, #F0A030 30%, transparent) 0%, color-mix(in srgb, var(--mark) 16%, transparent) 35%, transparent 72%);animation:bg-breathe 18s ease-in-out infinite}
 .bg .p{position:absolute;left:0;top:0;will-change:transform}
-.bg .dot{border-radius:50%;background:var(--star);scale:calc(1 + var(--g,0)*.9);box-shadow:0 0 3px 0 color-mix(in srgb, var(--star) 30%, transparent);will-change:transform,opacity;animation:p-drift var(--dur,30s) ease-in-out infinite,p-twinkle var(--tw,5s) ease-in-out infinite;animation-delay:var(--d1,0s),var(--d2,0s);opacity:var(--o,.1)}
+.bg .dot{border-radius:50%;background:var(--star);scale:calc(1 + var(--g,0)*.6);box-shadow:0 0 3px 0 color-mix(in srgb, var(--star) 30%, transparent);will-change:transform,opacity;animation:p-drift var(--dur,30s) ease-in-out infinite,p-twinkle var(--tw,5s) ease-in-out infinite;animation-delay:var(--d1,0s),var(--d2,0s);opacity:var(--o,.1)}
 .bg .dot.mark{background:var(--star-mark);box-shadow:0 0 4px 0 color-mix(in srgb, var(--star-mark) 35%, transparent)}
 .bg .w{position:absolute;left:0;top:0;animation:p-wander var(--wd,40s) ease-in-out infinite;animation-delay:var(--wdel,0s)}
 .bg .c{position:absolute;left:0;top:0;animation:p-cluster var(--cd,16s) ease-in-out infinite;animation-delay:var(--cdel,0s)}
 .wrap{position:relative;z-index:1}
 @keyframes p-drift{0%,100%{transform:translate(0,0)}50%{transform:translate(var(--dx,8px),var(--dy,-8px))}}
 @keyframes p-wander{0%,100%{transform:translate(0,0)}25%{transform:translate(calc(var(--wx,50px)*.5),calc(var(--wy,30px)*.3))}50%{transform:translate(var(--wx,50px),var(--wy,30px))}75%{transform:translate(calc(var(--wx,50px)*.3),calc(var(--wy,30px)*.7))}}
-@keyframes p-twinkle{0%,100%{opacity:min(1,calc(var(--o,.15) + var(--g,0)*.8))}50%{opacity:min(1,calc(var(--omin,.05) + var(--g,0)*.8))}}
+@keyframes p-twinkle{0%,100%{opacity:min(1,calc(var(--o,.15) + var(--g,0)*.6))}50%{opacity:min(1,calc(var(--omin,.05) + var(--g,0)*.6))}}
 @keyframes p-cluster{0%,100%{transform:translate(var(--cx,0),var(--cy,0))}50%{transform:translate(calc(var(--cx,0px)*.3),calc(var(--cy,0px)*.3))}}
 @keyframes bg-breathe{0%,100%{opacity:.6}50%{opacity:1}}
 @media (prefers-reduced-motion: reduce){.bg *{animation:none!important}}
@@ -280,14 +280,14 @@ footer a{color:var(--muted)}
       var o=Math.min(.55,+it.el.dataset.o*boost)*keep,om=Math.min(o,Math.max(.04,+it.el.dataset.omin*boost))*keep;
       it.el.style.setProperty('--o',o.toFixed(3));it.el.style.setProperty('--omin',om.toFixed(3));}
   }
-  var parallaxQueued=false,mx=-1e4,my=-1e4,RADIUS=150,hot=[];
+  var parallaxQueued=false,mx=-1e4,my=-1e4,RADIUS=200,hot=[];
   for(var q=0;q<items.length;q++){items[q].rx=0;items[q].ry=0;items[q].glow=0}
   function parallax(){parallaxQueued=false;
     var rects=[],k;for(k=0;k<items.length;k++)rects.push(items[k].el.getBoundingClientRect());
     var any=false;
     for(k=0;k<items.length;k++){var it=items[k],r=rects[k],cx=r.left+r.width/2-it.rx,cy=r.top+r.height/2-it.ry,dx=cx-mx,dy=cy-my,d=Math.sqrt(dx*dx+dy*dy);
-      var tx=0,ty=0,tg=0;if(d<RADIUS&&d>0){var f=(1-d/RADIUS);f=f*f;tx=dx/d*f*60;ty=dy/d*f*60;tg=f}
-      it.rx+=(tx-it.rx)*.12;it.ry+=(ty-it.ry)*.12;it.glow+=(tg-it.glow)*.12;
+      var tx=0,ty=0,tg=0;if(d<RADIUS&&d>0){var f=(1-d/RADIUS);f=f*f;tx=dx/d*f*22;ty=dy/d*f*22;tg=f*.4}
+      it.rx+=(tx-it.rx)*.07;it.ry+=(ty-it.ry)*.07;it.glow+=(tg-it.glow)*.07;
       if(Math.abs(it.rx)>.05||Math.abs(it.ry)>.05||it.glow>.005)any=true;
       it.outer.style.transform='translate('+it.rx.toFixed(1)+'px,'+(-scrollY0*it.depth*.08+it.ry).toFixed(1)+'px)';
       it.el.style.setProperty('--g',it.glow.toFixed(3));}
